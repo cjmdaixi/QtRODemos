@@ -1,5 +1,5 @@
 TEMPLATE = subdirs
 
 SUBDIRS += \
-    Introduction \
-    Dynamic
+    Source \
+    Replica
