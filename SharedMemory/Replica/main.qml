@@ -1,60 +1,13 @@
-import QtQuick 2.9
-import QtQuick.Window 2.2
+﻿import QtQuick 2.7
+import QtQuick.Window 2.3
+import CppBackend 1.0
 import QtQuick.Controls 2.2
-import QtQuick.Layouts 1.3
 import QtQuick.Dialogs 1.2
+import "ui"
 
-Window {
-    visible: true
-    width: 640
-    height: 480
-    title: qsTr("QtRO Introduction: Replica")
+QtObject {
+    id: root
 
-    FileDialog {
-        id: fileDialog
-        title: qsTr("请选择文件")
-        folder: shortcuts.home
-        onAccepted: {
-            var path = fileDialog.fileUrl.toString();
-            path= path.replace(/^(file:\/{3})|(qrc:\/{2})|(http:\/{2})/,"");
-            // unescape html codes like '%23' for '#'
-            var cleanPath = decodeURIComponent(path);
-            textFieldPath.text = cleanPath;
-            $replica.read(cleanPath);
-        }
-    }
+    property QtObject $viewer: MainView{}
 
-    ColumnLayout{
-        anchors.fill: parent
-        anchors.margins: 10
-        Label{
-            Layout.fillWidth: true
-            text: qsTr("文件路径：")
-        }
-        RowLayout{
-            Layout.fillWidth: true
-
-            TextField{
-                id: textFieldPath
-                Layout.fillWidth: true
-            }
-            Button{
-                id: buttonSelect
-                text: qsTr("选择文件...")
-                onClicked: {
-                    fileDialog.open();
-                }
-            }
-        }
-        Label{
-            Layout.fillWidth: true
-            text: qsTr("文件内容：")
-        }
-        TextArea{
-            Layout.fillWidth: true
-            Layout.fillHeight: true
-            text: $replica.content
-            readOnly: true
-        }
-    }
 }

@@ -1,0 +1,9 @@
+class FileReader
+{
+ENUM FileStatus{
+    FS_OK,
+    FS_Error
+}
+PROP(FileStatus fe READWRITE)
+SIGNAL(statusRenewed(FileStatus newStatus))
+}

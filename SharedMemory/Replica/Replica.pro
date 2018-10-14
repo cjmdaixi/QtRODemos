@@ -12,7 +12,20 @@ DEFINES += QT_DEPRECATED_WARNINGS
 # You can also select to disable deprecated APIs only up to a certain version of Qt.
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
-SOURCES += main.cpp
+HEADERS += \
+    appglobal.h \
+    quickosgrenderer.h \
+    quickosgviewer.h \
+    viewerdatum.h \
+    appworker.h
+
+SOURCES += \
+    main.cpp \
+    appglobal.cpp \
+    quickosgrenderer.cpp \
+    quickosgviewer.cpp \
+    viewerdatum.cpp \
+    appworker.cpp
 
 RESOURCES += qml.qrc
 
@@ -24,7 +37,9 @@ QML_IMPORT_PATH =
 # Additional import path used to resolve QML modules just for Qt Quick Designer
 QML_DESIGNER_IMPORT_PATH =
 
-# Default rules for deployment.
-qnx: target.path = /tmp/$${TARGET}/bin
-else: unix:!android: target.path = /opt/$${TARGET}/bin
-!isEmpty(target.path): INSTALLS += target
+win32:CONFIG(release, debug|release): LIBS += -L$$PWD/3rd/windows/x64/OSG/lib/ -L$$PWD/3rd/windows/x64/deploy/Release -losgText -losgShadow -losg -losgDB -losgViewer -losgGA -lOpenThreads -losgUtil -losgManipulator
+else:win32:CONFIG(debug, debug|release): LIBS += -L$$PWD/3rd/windows/x64/OSG/lib/ -L$$PWD/3rd/windows/x64/deploy/Debug -losgTextd -losgShadowd -losgd -losgDBd -losgViewerd -losgGAd -lOpenThreadsd -losgUtild -losgManipulatord
+
+INCLUDEPATH +=  $$PWD/3rd \
+    $$PWD/3rd/windows/x64/OSG/include
+DEPENDPATH += $$PWD/3rd/windows/x64/OSG/include

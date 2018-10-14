@@ -17,13 +17,9 @@ SOURCES += main.cpp
 
 REPC_SOURCE = ../Reps/filereader.rep
 
+INCLUDEPATH += "$$(BOOST_ROOT)"
+LIBS += -L$$(BOOST_ROOT)/lib
+## Use only one of these:
+LIBS += -lboost_filesystem-vc120-mt-x64-1_68 # using dynamic lib (not sure if you need that "-mt" at the end or not)
+#LIBS += $${_BOOST_PATH}/lib/libboost_chrono-mt.a # using static lib
 
-
-macx {
-    _BOOST_PATH = /usr/local/Cellar/boost/1.67.0_1
-    INCLUDEPATH += "$${_BOOST_PATH}/include/"
-    LIBS += -L$${_BOOST_PATH}/lib
-    ## Use only one of these:
-    LIBS += -lboost_filesystem-mt # using dynamic lib (not sure if you need that "-mt" at the end or not)
-    #LIBS += $${_BOOST_PATH}/lib/libboost_chrono-mt.a # using static lib
-}
