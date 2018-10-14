@@ -1,0 +1,6 @@
+class FileReader
+{
+    PROP(QByteArray content READONLY)
+    SIGNAL(dataReady(QString key))
+    SLOT(read(QString path))
+}
